@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    char type[10];
+    int rows, cols;
+    char memoryArrangement;
+    int baseAddress;
+    int i, j;
+
+    cout << "Enter the type of array (int, char, float, double): ";
+    cin >> type;
+
+    cout << "Enter the number of rows: ";
+    cin >> rows;
+    cout << "Enter the number of columns: ";
+    cin >> cols;
+
+    cout << "Enter memory arrangement (R for Row-major, C for Column-major): ";
+    cin >> memoryArrangement;
+
+    cout << "Enter the base address of the array: ";
+    cin >> baseAddress;
+
+    cout << "Enter the row index i: ";
+    cin >> i;
+    cout << "Enter the column index j: ";
+    cin >> j;
+
+    int typeSize = 0;
+
+    if (type[0] == 'i' && type[1] == 'n' && type[2] == 't' && type[3] == '\0') {
+        typeSize = sizeof(int);
+    }
+    else if (type[0] == 'c' && type[1] == 'h' && type[2] == 'a' && type[3] == 'r' && type[4] == '\0') {
+        typeSize = sizeof(char);
+    }
+    else if (type[0] == 'f' && type[1] == 'l' && type[2] == 'o' && type[3] == 'a' && type[4] == 't' && type[5] == '\0') {
+        typeSize = sizeof(float);
+    }
+    else if (type[0] == 'd' && type[1] == 'o' && type[2] == 'u' && type[3] == 'b' && type[4] == 'l' && type[5] == 'e' && type[6] == '\0') {
+        typeSize = sizeof(double);
+    }
+    else {
+  
+        typeSize = sizeof(int); 
+    }
+
+    int address;
+    if (memoryArrangement == 'R' || memoryArrangement == 'r') {
+       
+        address = baseAddress + ((i * cols) + j) * typeSize;
+    } else if (memoryArrangement == 'C' || memoryArrangement == 'c') {
+        
+        address = baseAddress + ((j * rows) + i) * typeSize;
+    } else {
+        cout << "Invalid memory arrangement!" << endl;
+        return 1;
+    }
+
+    
+    cout << "The address of the element at index (" << i << ", " << j << ") is: " << address << endl;
+
+    return 0;
+}
